@@ -10,8 +10,10 @@ form.addEventListener("submit", (event) => {
 
     items = {
         itemName: formdata.get("item-name"),
-        itemSellIn: formdata.get("sale-in"),
+        itemSellIn: formdata.get("sell-in"),
         itemQuality: formdata.get("quality"),
+        itemAdded: formdata.get("date-added"),
+
     }
 
     const listOfInventory = document.createElement("div")
@@ -20,7 +22,7 @@ form.addEventListener("submit", (event) => {
     <span>${items.itemName}</span>
     <span>${items.itemSellIn}</span>
     <span>${items.itemQuality}</span>
-    
+    <span>${items.itemAdded}</span>
     `
 
 })
