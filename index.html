@@ -15,9 +15,9 @@
     <main>
         <h1> Howdy Folks ! <br> This is the Gilded Rose !</h1>
 
-        <div>
+        <div class="item-inputs-section">
             <form class="form">
-                <label for="item-name">Name of Item:</label>
+                <label for="item-name">Enter Name of Item:</label>
                 <input type="text" name="item-name" id="item-name" required>
 
                 <label for="sell-in">Days to Sell:</label>
@@ -25,11 +25,19 @@
 
                 <label for="quality">Enter Item's Quality:</label>
                 <input type="number" id="quality" name="quality" min="0" required>
-                <label for="date-added">Date Added to Inventory</label>
+
+                <label for="date-added">Enter Date Added to Inventory</label>
                 <input type="date" id="date-added" name="date-added" required>
                 <button type="submit">Add Item</button>
 
             </form>
+        </div>
+
+        <article class="inventory">
+
+        </article>
+
+
         </div>
 
     </main>
