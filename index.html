@@ -13,32 +13,33 @@
 
 <body>
     <main>
-        <h1> Howdy Folks ! <br> This is the Gilded Rose ! <br> .... of TEXAS !!!!</h1>
+        <h1> Howdy Folks ! <br> Welcome to the Gilded Rose <br> .... of TEXAS !!!!</h1>
 
-        <div class="item-inputs-section">
-            <form class="form">
-                <label for="item-name">Enter Name of Item:</label>
-                <input type="text" name="item-name" id="item-name" required>
 
-                <label for="sell-in">Enter Days to Sell:</label>
-                <input type="number" min="0" max="15" name="sell-in" id="sell-in" required>
+        <form>
 
-                <label for="quality">Enter Item's Quality:</label>
-                <input type="number" id="quality" name="quality" min="0" required>
+            <label for="item-name">Enter Name of Item:</label>
+            <input type="text" name="item-name" id="item-name" required>
 
-                <label for="date-added">Enter Date Added to Inventory</label>
-                <input type="date" id="date-added" name="date-added" required>
-                <button type="submit">Add Item</button>
+            <label for="sell-in">Enter Days to Sell:</label>
+            <input type="number" min="0" max="15" name="sell-in" id="sell-in" required>
 
-            </form>
+            <label for="quality">Enter Item's Quality:</label>
+            <input type="number" id="quality" name="quality" min="0" required>
 
-            <h2>Inventory</h2>
-            <article class="inventory">
+            <label for="date-added">Enter Date Added to Inventory</label>
+            <input type="date" id="date-added" name="date-added" required>
+            <button type="submit">Add Item</button>
 
-            </article>
-        </div>
-
-        </div>
+        </form>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Sell In</th>
+                <th>Quailty</th>
+                <th>Date added</th>
+            </tr>
+        </table>
 
     </main>
 </body>
