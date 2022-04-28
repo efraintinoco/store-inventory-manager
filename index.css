@@ -3,10 +3,11 @@
 body{
     font-family: 'El Messiri', sans-serif;
     margin: 30px;
-    background-image: url(/bigtex.jpg);
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 0) 15%,rgb(255, 255, 255) 100%),url(/bigtex.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    
 }
 
 input {
@@ -45,4 +46,7 @@ button{
     font-weight: bold;
     color: white;
     background-color: rgb(65, 64, 64);
+}
+button:hover {
+    color: rgb(170, 165, 165);
 }
