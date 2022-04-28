@@ -3,17 +3,46 @@
 body{
     font-family: 'El Messiri', sans-serif;
     margin: 30px;
+    background-image: url(/bigtex.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 input {
-    width: 150px;
-    padding: 0px;
+    width: 200px;
+    padding: 2px;
     margin: 5px;
     display: block;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     margin-left: 0px;
+    font-size: medium;
+}
+
+label{
+    font-size: 20px;
+    font-weight: bold;
 }
 
 form{
     margin-bottom: 50px;
+}
+
+h1{
+    font-size: 40px;
+}
+
+h2{
+    font-size: 40px;
+}
+
+button{
+    margin-left: 3px;
+    margin-top: 10px;
+    width: 200px;
+    height: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(65, 64, 64);
 }
