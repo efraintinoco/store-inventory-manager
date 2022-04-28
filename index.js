@@ -24,5 +24,6 @@ form.addEventListener("submit", (event) => {
     <span>${items.itemQuality}</span>
     <span>${items.itemAdded}</span>
     `
+    event.target.reset()
 
 })
