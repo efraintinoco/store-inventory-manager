@@ -20,14 +20,14 @@
     >
         <form>
             <label for="item">Enter Item Name</label>
-            <input type="text" name="item">
+            <input type="text" name="item" required>
            
             <label for="sell_in">Sell in days</label>
-            <input type="number" name="sell_in">
+            <input type="number" name="sell_in" min="0" max="15" required>
            
             <label for="quality">Quality</label>
-            <input type="number" name="quality">
-            <input class="button" type="submit" name="submit">
+            <input type="number" name="quality" min="0" max="50" required> 
+            <input class="button" type="submit" name="submit" >
         </form>
         
     </div>
