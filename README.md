@@ -1,4 +1,4 @@
-Deployed website addressg..... https://efraintinoco.github.io/store-inventory-manager/
+Deployed website address... https://efraintinoco.github.io/store-inventory-manager/
 
 
 
