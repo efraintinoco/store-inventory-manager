@@ -1,7 +1,166 @@
+const main = document.querySelector("main")
+const form = document.querySelector("form")
+const button = document.querySelector("button")
+const today = new Date().toLocaleDateString("en-US")
+
+
+let inventory = [{
+    name: "+5 Dexerity Vest",
+    sell_in: 10,
+    quality: 20,
+    category: "none",
+    date: today
+}, {
+    name: "Aged Brie",
+    sell_in: 2,
+    quality: 0,
+    category: "Aged Brie",
+    date: today
+}, {
+    name: "Elixir of the Mongoose",
+    sell_in: 5,
+    quality: 7,
+    category: "none",
+    date: today
+}, {
+    name: "Sulfuras, Hand of Ragnaros",
+    sell_in: 0,
+    quality: 80,
+    category: "Sulfuras",
+    date: today
+}, {
+    name: "Backstage passes to a TAFKAL80ETC concert",
+    sell_in: 15,
+    quality: 20,
+    category: "Backstage passes",
+    date: today
+}, {
+    name: "Conjured Mana Cake",
+    sell_in: 3,
+    quality: 6,
+    category: "Conjured",
+    date: today
+}]
+showItems(inventory)
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.target)
+    const item = {
+        name: formData.get("item"),
+        sell_in: +formData.get("sell_in"),
+        quality: +formData.get("quality"),
+        date: today,
+    }
+    inventory = [...inventory, item]
+    parseCategory(item)
+    checkQuality(item)
+    showItems(item)
+    form.reset()
+})
+
+button.addEventListener("click", event => {
+    event.preventDefault()
+    inventory.forEach(item => {
+        degradeQuality(item)
+        checkQuality(item)
+        updateSellIn(item)
+        showItems(item)
+    })
+})
+
+function parseCategory(item) {
+    if (item.name.includes("Aged Brie") || item.name.includes("aged brie")) {
+        item.category = "Aged Brie"
+    } else if (item.name.includes("Sulfuras") || item.name.includes("sulfuras")) {
+        item.category = "Sulfuras"
+    } else if (item.name.includes("Backstage") || item.name.includes("backstage")) {
+        item.category = "Backstage passes"
+    } else if (item.name.includes("Conjured") || item.name.includes("conjured")) {
+        item.category = "Conjured"
+    } else {
+        item.category = "none"
+    }
+    return item
+}
+
+function showItems(item) {
+    main.innerHTML = ``
+    inventory.map(item => {
+        const $itemList = document.createElement("div")
+        $itemList.classList.add("inventory-list")
+        $itemList.innerHTML = ` 
+            <p>${item.name}</p>
+            <p>${item.sell_in}</p>
+            <p>${item.quality}</p>
+            <p>${item.date}</p>
+            <p>${item.category}</p>
+            
+            `
+        return $itemList
+    }).forEach(($itemList) => {
+        main.append($itemList)
+
+    })
+}
+
+function degradeQuality(item) {
+    if (item.category === "Sulfuras") {
+        return item.quality = 80
+    } else if (item.category === "Conjured" && item.sell_in === 0) {
+        return item.quality = 0
+    } else if (item.category === "Conjured") {
+        return item.quality -= 2
+    } else if (item.category === "Backstage passes" && item.sell_in === 0) {
+        return item.quality = 0
+    } else if (item.category === "Backstage passes" && item.sell_in > 10) {
+        return item.quality = item.quality + 1
+    } else if (item.category === "Backstage passes" && item.sell_in <= 10 && item.sell_in > 5) {
+        return item.quality = item.quality + 2
+    } else if (item.category === "Backstage passes" && item.sell_in <= 5) {
+        return item.quality = item.quality + 3
+    } else if (item.category === "Aged Brie") {
+        return item.quality = item.quality + 1
+    } else if (item.sell_in <= 0) {
+        return item.quality -= 2
+    } else {
+        return item.quality -= 1
+    }
+
+}
+
+function updateSellIn(item) {
+    if (item.category === "Sulfuras") {
+        return item.sell_in = 0
+    } else if (item.sell_in > 0) {
+        return item.sell_in = item.sell_in - 1
+    } else {
+        return item.sell_in = 0
+    }
+}
+
+function checkQuality(item) {
+    if (item.category === "Sulfuras") {
+        return item.quality = 80
+    } else if (item.category === "Aged Brie" && item.quality < 50) {
+        return item.quality
+    } else if (item.category === "Backstage passes" && item.quality < 50) {
+        return item.quality
+    } else if (item.quality > 50) {
+        return item.quality = 50
+    } else if (item.quality <= 0) {
+        return item.quality = 0
+    } else {
+        return item.quality
+    }
+}
+
+/*
 const form = document.querySelector("form")
 const table = document.querySelector("table")
 const today = new Date().toLocaleDateString("en-US")
-const localStorageItems = localStorage.getItem("allInventory");
+// const localStorageItems = localStorage.getItem("addedItem");
 const itemName = document.querySelector("#item-name");
 const itemQualityInput = document.querySelector("#quality");
 const updateEndOfDay = document.querySelector("#update")
@@ -39,28 +198,73 @@ let inventory = [{
     quality: 20,
     category: "Backstage Pass",
     date: today
-}]
-/*
-inventory.map(item => {
+    }]
 
-    const tr = document.createElement("tr")
+displayInventory(inventory)
 
-    tr.innerHTML = `
+
+function displayInventory() {
+    inventory.map(item => {
+
+        const tr = document.createElement("tr")
+
+        tr.innerHTML = `
     <td>${item.item}</td>
     <td>${item.sellIn} days</td>
     <td>${item.quality}</td>
     <td>${today}</td>
     <td>${item.category}</td>
     `
-    table.append(tr)
-})
-*/
-if (localStorageItems) {
+        table.append(tr)
+    })
+}
 
-    const parsedItems = JSON.parse(localStorageItems)
-    const { allInventory } = parsedItems
 
-    allInventory.map((items) => {
+    form.addEventListener("submit", event => {
+        event.preventDefault()
+    //    location.reload();
+        const formData = new FormData(event.target)
+
+        const newItem = {
+            name: formData.get("item-name"),
+            sellIn: +formData.get("sell-in"),
+            quality: +formData.get("quality"),
+            date: formData.get("date-added"),
+            category: parseCategory(itemName)
+        }
+        inventory = [...inventory, newItem]
+       // parseCategory(itemName)
+      //  qualityCheck(item)
+      //  displayInventory(inventory)
+    })
+        /*       const itemName = formData.get("item-name")
+        const sellIn = +formData.get("sell-in")
+        const quality = +formData.get("quality")
+        const date = formData.get("date-added")
+        const category = parseCategory(itemName)
+    }
+        
+        
+        const newItem = {
+            item: itemName,
+            sellIn: +sellIn,
+            quality: +quality,
+            date: date,
+            category: category,
+        }
+        newInventory = [...inventory, newItem]
+        
+
+
+
+
+
+
+
+
+
+    inventory.map((items) => {
+
         const createRow = document.createElement("tr")
         createRow.innerHTML = `
         <td>${items.item}</td>
@@ -70,32 +274,26 @@ if (localStorageItems) {
         <td>${items.category}</td>
         `
         table.append(createRow)
+        
+        
     })
-}
 
-form.addEventListener("submit", event => {
-    event.preventDefault()
-    location.reload();
-    const formData = new FormData(event.target)
-    const itemName = formData.get("item-name")
-    const sellIn = formData.get("sell-in")
-    const quality = formData.get("quality")
-    const date = formData.get("date-added")
-    const category = parseCategory(itemName)
-    console.log(parseCategory(itemName))
-    const newInventory = {
-        item: itemName,
-        sellIn: sellIn,
-        quality: quality,
-        date: date,
-        category: category,
-    }
+    updateEndOfDay.addEventListener("click", event => {
+        
+        
+      
+        inventory.map(item => {
 
-    const allInventory = localStorageItems ? JSON.parse(localStorageItems).allInventory : []
-    allInventory.push(newInventory)
-    const itemsJSON = JSON.stringify({ allInventory })
-    localStorage.setItem("allInventory", itemsJSON)
-})
+            degradesQuality(item)
+            updatesSellIn(item)
+            qualityCheck(item)
+            
+        })
+  
+
+    })
+
+
 
 itemName.addEventListener("input", () => {
     if (itemName.value.toLowerCase().includes("sulfuras")) {
@@ -113,54 +311,51 @@ function parseCategory(itemName) {
     let category = ""
     inventory.forEach(item => {
         if (item.item.includes(itemName)) {
-        category = item.category
+            category = item.category
         }
     })
     return category
 }
 
-//allitemsinventory change to go thru , and apply changes to those items 
-function degradeQuality(item) {
-    if (item.item === "Sulfuras") {
+
+function degradesQuality(item) {
+    if (item.category === "Sulfuras") {
         return item.quality = 80
-    } else if (item.item === "Conjured") {
+    } else if (item.category === "Conjured") {
         return item.quality -= 2
-    } else if (item.item === "Backstage passes" && item.sellIn > 10) {
-        return item.quality += 1
-    } else if (item.item === "Backstage passes" && item.sellIn <= 10) {
-        return item.quality += 2
-    } else if (item.item === "Backstage passes" && item.sellIn <= 5) {
-        return item.quality += 3
-    } else if (item.item === "Backstage passes" && item.sellIn <= 0) {
+    } else if (item.category === "Backstage pass" && item.sellIn === 0) {
         return item.quality = 0
+    } else if (item.category === "Backstage pass" && item.sellIn > 10) {
+        return item.quality = item.quality + 1
+    } else if (item.category === "Backstage pass" && item.sellIn <= 10 && item.sellIn > 5) {
+        return item.quality = item.quality + 2
+    } else if (item.category === "Backstage pass" && item.sellIn <= 5) {
+        return item.quality = item.quality + 3
+    } else if (item.category === "Aged Brie") {
+        return item.quality = item.quality + 1
     } else if (item.sellIn <= 0) {
         return item.quality -= 2
-    } else if (item.item === "Aged Brie") {
-        return item.quality += 1
     } else {
         return item.quality -= 1
     }
 
 }
-degradeQuality()
-console.log(degradeQuality())
 
-
-
-/*
-function updateSellIn(item) {
+function updatesSellIn(item) {
     if (item.item === "Sulfuras") {
         return item.sellIn = 0
     } else if (item.sellIn > 0) {
         return item.sellIn = item.sellIn - 1
+    } else {
+        return item.sellIn = 0
     }
- 
 }
-*/
-/*
-function checkQuality(item) {
-    if (item.name === "Sulfuras") {
+
+function qualityCheck(item) {
+    if (item.category === "Sulfuras") {
         return item.quality = 80
+    } else if (item.category === "Aged Brie") {
+        return item.quality
     } else if (item.quality > 50) {
         return item.quality = 50
     } else if (item.quality < 0) {
@@ -168,25 +363,12 @@ function checkQuality(item) {
     } else {
         return item.quality
     }
- 
 }
-*/
-
-updateEndOfDay.addEventListener("click", event => {
-    degradeQuality(item)
-   
-    const itemsJSON = JSON.stringify({ allInventory })
-   
-    localStorage.setItem("allInventory", itemsJSON)
-    const allInventory = localStorageItems ? JSON.parse(localStorageItems).allInventory : []
-    location.reload();
-    
-
-//
-})
-
 
 clear.addEventListener("click", (event) => {
     localStorage.clear()
     window.location.reload()
 })
+
+
+*/

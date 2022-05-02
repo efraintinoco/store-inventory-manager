@@ -1,50 +1,47 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gilded Rose</title>
-    <script defer src="index.js"></script>
     <link rel="stylesheet" href="index.css">
+    <script defer src="index.js"></script>
+    <title>Gilded Rose</title>
 </head>
 
 <body>
-    <main>
-        <h1> Howdy Folks ! <br> Welcome to the Gilded Rose <br> .... of TEXAS !!!!</h1>
-
-
+    
+    <header>
+        <h1>Howdy Folks! <br> Welcome to the Gilded Rose.... <br>....  of TEXAS!
+        </h1>
+    </header>
+    <div>
         <form>
-
-            <label for="item-name">Enter Name of Item:</label>
-            <input type="text" name="item-name" id="item-name" required>
-
-            <label for="sell-in">Enter Days to Sell:</label>
-            <input type="number" min="0" max="15" name="sell-in" id="sell-in" required>
-
-            <label for="quality">Enter Item's Quality:</label>
-            <input type="number" id="quality" name="quality" min="0" required>
-
-            <!---         <label for="date-added">Enter Date Added to Inventory</label>
-                 <input type="date" id="date-added" name="date-added" required>
-   -->
-            <button type="click">Add Item</button>
-
+            <label for="item">Enter Item Name</label>
+            <input type="text" name="item">
+           
+            <label for="sell_in">Sell in days</label>
+            <input type="number" name="sell_in">
+           
+            <label for="quality">Quality</label>
+            <input type="number" name="quality">
+            <input class="button" type="submit" name="submit">
         </form>
-        <table>
-            <tr>
-                <th>Item</th>
-                <th>Sell In</th>
-                <th>Quailty</th>
-                <th>Date added</th>
-                <th>Catagory</th>
-            </tr>
-        </table>
-        <button id="update" type="click">End of Day</button>
-        <button id="clear" type="click">Clear Inventory</button>
+        
+    </div>
+    <h2>Inventory</h2>
+    <div class="inventory-title">
+        <p>Name</p>
+        <p>Sell In</p>
+        <p>Quality</p>
+        <p>Added</p>
+        <p>Category</p>
+    </div>
+    <main>
+        
     </main>
+    <button class="button" type="click" name="Update">Next Day</button>
 </body>
 
 </html>
