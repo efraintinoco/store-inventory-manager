@@ -2,6 +2,7 @@ const main = document.querySelector("main")
 const form = document.querySelector("form")
 const button = document.querySelector("button")
 const today = new Date().toLocaleDateString("en-US")
+const reset = document.querySelector(".reset")
 
 
 let inventory = [{
@@ -68,6 +69,9 @@ button.addEventListener("click", event => {
         updateSellIn(item)
         showInventory(item)
     })
+})
+reset.addEventListener("click", () => { 
+    window.location.reload()
 })
 
 function showInventory() {

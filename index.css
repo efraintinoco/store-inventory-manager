@@ -58,9 +58,22 @@ label{
     font-weight: bold;
     color: white;
     background-color:rgb(1, 1, 109);
-    margin-bottom: 30px;
 }
 
+.reset{
+    margin-top: 15px;
+    width: 200px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color:rgb(1, 1, 109);
+    margin-bottom: 20px;
+}
+
+.reset:hover {
+    color: rgb(223, 6, 6); 
+}
 .inventory-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
