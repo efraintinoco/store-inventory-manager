@@ -70,14 +70,13 @@ button.addEventListener("click", event => {
         showInventory(item)
     })
 })
-reset.addEventListener("click", () => { 
+reset.addEventListener("click", () => {
     window.location.reload()
 })
 
 function showInventory() {
     main.innerHTML = ``
     inventory.map(item => {
-        
         const itemList = document.createElement("div")
         itemList.classList.add("inventory-list")
         itemList.innerHTML = ` 
@@ -135,8 +134,6 @@ function checkQuality(item) {
 function degradeQuality(item) {
     if (item.category === "Sulfuras") {
         return item.quality = 80
-    } else if (item.category === "Conjured" && item.sellIn === 0) {
-        return item.quality = 0
     } else if (item.category === "Conjured") {
         return item.quality -= 2
     } else if (item.category === "Backstage passes" && item.sellIn === 0) {
