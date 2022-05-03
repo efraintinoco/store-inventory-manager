@@ -73,6 +73,7 @@ button.addEventListener("click", event => {
 function showInventory() {
     main.innerHTML = ``
     inventory.map(item => {
+        
         const itemList = document.createElement("div")
         itemList.classList.add("inventory-list")
         itemList.innerHTML = ` 
@@ -81,7 +82,6 @@ function showInventory() {
             <p>${item.quality}</p>
             <p>${item.date}</p>
             <p>${item.category}</p>
-            
             `
         return itemList
     }).forEach((itemList) => {
@@ -109,8 +109,6 @@ function updateSellIn(item) {
         return item.sellIn = 0
     } else if (item.sellIn > 0) {
         return item.sellIn = item.sellIn - 1
-    } else {
-        return item.sellIn = 0
     }
 }
 
